@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                color: white;
+            }
+            h1{
+                color: white;
+            }
+            .center{
+                text-align: center;
+            }
+            .center2{
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 10%;
+              height: 20%;
+            }
+            .buttonCenter1{
+              left:40%;
+              top:30%;
+              position:absolute;
+              transform:translate(-30%,-30%);
+            }
+            .buttonCenter2{
+              left:55%;
+              top:30%;
+              position: absolute;
+              transform:translate(-30%,-30%)
+
+            }
+
+        
+
+        </style>
+        <title>The Stock Guessing Game</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="StocksLogo.png" class="logo">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Game</a></li>
+                <li><a href="#">Stats</a></li>
+                <li><a href="about.html">About</a></li>
+
+            </ul>
+        </div>
+
+            <h1 class="center">Stock Price Guessing Game</h1>
+            <p class="center">Guess if the stock price of <span id="stock-name">[Stock Name]</span> will be higher or lower in the next 5 seconds!</p>
+            <button class="buttonCenter1" id="higher-button">Higher</button>
+            <button class="buttonCenter2" id="lower-button">Lower</button>
+            <p class="center" id="result"></p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <h1 class="center">Todays Stock: Google</h1>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <p> &nbsp</p>
+            <img class ="center2" src="google.png" >
+            
+            <script>
+              const stockName = document.querySelector("#stock-name");
+              const higherButton = document.querySelector("#higher-button");
+              const lowerButton = document.querySelector("#lower-button");
+              const result = document.querySelector("#result");
+              
+              let currentStockPrice;
+              
+              // Function to fetch stock price data from API
+              async function getStockPrice() {
+
+             // Replace [API URL] with actual API URL
+                const response = await fetch("https://finnhub.io/api/v1/quote?symbol=${GOOGL}&token=${cfeqaspr01qoicaf9o30cfeqaspr01qoicaf9o3g}");
+                const data = await response.json();
+                return data.price;
+              }
+              
+              // Function to start the game
+              async function startGame() {
+
+                // Disable buttons
+                higherButton.disabled = true;
+                lowerButton.disabled = true;
+                
+                // Get current stock price
+                currentStockPrice = await getStockPrice();
+                stockName.textContent = currentStockPrice;
+                
+                // Wait 5 seconds
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                
+                // Get updated stock price
+                const updatedStockPrice = await getStockPrice();
+                
+                // Compare prices and display result
+                if (updatedStockPrice > currentStockPrice) {
+                  result.textContent = "&nbsp"
+                  result.textContent = "The stock price went up! You win.";
+                } else {
+                  result.textContent = "&nbsp"
+                  result.textContent = "The stock price went down. You lose.";
+                }
+                
+                // Enable buttons
+                higherButton.disabled = false;
+                lowerButton.disabled = false;
+              }
+              
+              higherButton.addEventListener("click", startGame);
+              lowerButton.addEventListener("click", startGame);
+            </script>
+          </body>
+          </html>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html> 
