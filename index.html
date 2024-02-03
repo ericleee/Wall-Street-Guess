@@ -31,9 +31,6 @@
               transform:translate(-30%,-30%)
 
             }
-
-        
-
         </style>
         <title>The Stock Guessing Game</title>
         <link rel="stylesheet" href="style.css">
@@ -45,92 +42,87 @@
             <img src="StocksLogo.png" class="logo">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Game</a></li>
-                <li><a href="#">Stats</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Stats.html">Stats</a></li>
                 <li><a href="about.html">About</a></li>
-
             </ul>
         </div>
+         <!-- Display the countdown timer in an element -->
+        
 
+         <h1 class="center" style="padding-top: 20px;">
+          The time to vote ends in:
+      </h1>
+      <div class="timer">
+          <p id="demo"></p>
+      </div>
+  
+      <script>
+          function getTargetDate(targetHour, targetMinute, targetSecond) {
+              var now = new Date();
+              var targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, targetMinute, targetSecond);
+  
+              // If the current time is past the target time, move the target to the next day.
+              if (now.getTime() > targetDate.getTime()) {
+                  targetDate.setDate(now.getDate() + 1);
+              }
+  
+              return targetDate;
+          }
+  
+          // Set the countdown target to a specific time the next day.
+          var countDownDate = getTargetDate(15, 0, 0).getTime(); // Target time is 15:00:00
+  
+          // Update the countdown every 1 second
+          var x = setInterval(function() {
+              var now = new Date().getTime();
+              var distance = countDownDate - now;
+  
+              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+              document.getElementById("demo").innerHTML = hours + "h "
+              + minutes + "m " + seconds + "s ";
+  
+              if (distance < 0) {
+                  clearInterval(x);
+                  document.getElementById("demo").innerHTML = "EXPIRED";
+                  // Automatically set the new countdown for the next day
+                  countDownDate = getTargetDate(15, 0, 0).getTime() + 24 * 60 * 60 * 1000;
+                  x = setInterval(arguments.callee, 1000);
+              }
+          }, 1000);
+      </script>
             <h1 class="center">Stock Price Guessing Game</h1>
-            <p class="center">Guess if the stock price of <span id="stock-name">[Stock Name]</span> will be higher or lower in the next 5 seconds!</p>
-            <p class="center">Note: Make sure to wait 5 seconds after your choice to see if u won!</p>
-            <button class="buttonCenter1" id="higher-button">Higher</button>
-            <button class="buttonCenter2" id="lower-button">Lower</button>
-            <p class="center" id="result"></p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
+            <p class="center">Guess if the stock price of <span id="stock-name">[Stock Name]</span> will be higher or lower by 3pm TODAY!</p>
+             <br><br>
+            <button type="button" id="higher-button">Higher</button>
+            <button type="button" id="lower-button">Lower</button>
+            <br><br>
             <h1 class="center">Todays Stock: Google</h1>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
-            <p> &nbsp</p>
+            <h1 class="center" id="stockPrice"></h1>
+
             <img class ="center2" src="google.png" >
-
-            <p id="price" class="center">Received Price: </p>
-            <p id="prediction" class="center">Prediction: </p>
-
-            
             <script>
-              const stockName = document.querySelector("#stock-name");
-              const higherButton = document.querySelector("#higher-button");
-              const lowerButton = document.querySelector("#lower-button");
-              const result = document.querySelector("#result");
+              document.addEventListener("DOMContentLoaded", function() {
+                  // Replace 'YOUR_API_KEY' with your actual Finnhub API key
+                  const apiKey = 'cjtnki9r01qr9581rns0cjtnki9r01qr9581rnsg';
+                  const symbol = 'GOOGL'; // Google's stock symbol on Finnhub
               
-              let currentStockPrice;
+                  const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
               
-              // Function to fetch stock price data from API
-              async function getStockPrice() {
-                  const response = await fetch("https://finnhub.io/api/v1/quote?symbol=${GOOGL}&token=${cfeqaspr01qoicaf9o30cfeqaspr01qoicaf9o3g}");
-                  const data = await response.json();
-                  return data.price;
-              }
+                  fetch(apiUrl)
+                      .then(response => response.json())
+                      .then(data => {
+                          const stockPrice = data.c; // 'c' represents the current price in the Finnhub API response
+                          document.getElementById('stockPrice').innerText = `Current Price: $${stockPrice}`;
+                      })
+                      .catch(error => console.error('Error fetching stock price:', error));
+              });
+              </script>
 
-              // Function to start the game
-              async function startGame() {
-
-                // Disable buttons
-                higherButton.disabled = true;
-                lowerButton.disabled = true;
-                
-                // Get current stock price
-                currentStockPrice = await getStockPrice();
-                stockName.textContent = currentStockPrice;
-                
-                // Wait 5 seconds
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                
-                // Get updated stock price
-                const updatedStockPrice = await getStockPrice();
-                
-                // Compare prices and display result
-                if (updatedStockPrice > currentStockPrice) {
-                  result.textContent = "---------------------------------------------"
-                  result.textContent = "The stock price choice was right! You win.";
-                } else {
-                  result.textContent = "---------------------------------------------"
-                  result.textContent = "The stock price choice was wrong. You lose.";
-                }
-                
-                // Display stock prediction content
-                document.getElementById("price").textContent = updatedStockPrice;
-                document.getElementById("prediction").textContent = updatedStockPrice > currentStockPrice ? "Up" : "Down";
-                
-                // Enable buttons
-                higherButton.disabled = false;
-                lowerButton.disabled = false;
-              }
-              
-              higherButton.addEventListener("click", startGame);
-              lowerButton.addEventListener("click", startGame);
-            </script>
-          </body>
+          </body> 
           </html>
             </div>
         </div>
