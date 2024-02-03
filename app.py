@@ -14,7 +14,28 @@ def index():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    return render_template('login.html')
+    conn = psycopg2.connect(database="StockGuess", user="edward", 
+                        password="x", host="localhost", port="5432") 
+    cur = conn.cursor()
+
+    email = request.form['email']
+    password = request.form['pswd']
+
+    cur.execute("SELECT email FROM users WHERE email=%s", (email,))
+
+    row = cur.fetchall()
+
+    if row:
+        if row[0][0] == password:
+            return redirect(url_for('login'))
+    else:
+        cur.execute('''INSERT INTO users \
+                    (email, password) VALUES (%s, %s)''',
+                    (email,password,))
+        conn.commit()
+        return redirect(url_for('index'))
+
+    return redirect(url_for('login'))
 
 @app.route('/submit', methods=['POST'])
 def submit():
