@@ -104,10 +104,6 @@
             <h1 class="center" id="stockPrice"></h1>
 
             <img class ="center2" src="google.png" >
-
-            <p id="price" class="center">Received Price: </p>
-            <p id="prediction" class="center">Prediction: </p>
-
             
             <script>
               const stockName = document.querySelector("#stock-name");
@@ -149,10 +145,6 @@
                   result.textContent = "---------------------------------------------"
                   result.textContent = "The stock price choice was wrong. You lose.";
                 }
-                
-                // Display stock prediction content
-                document.getElementById("price").textContent = updatedStockPrice;
-                document.getElementById("prediction").textContent = updatedStockPrice > currentStockPrice ? "Up" : "Down";
                 
                 // Enable buttons
                 higherButton.disabled = false;
