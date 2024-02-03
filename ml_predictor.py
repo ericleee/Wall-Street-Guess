@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
 # ml_predictor.py
-import json
 # import websocket
-=======
->>>>>>> Stashed changes
 import torch
 import joblib
 import requests
@@ -28,14 +24,9 @@ data = response.json()
 open_price = data.get('o', 0)  # 'o' represents the open price
 close_price = data.get('c', 0)  # 'c' represents the close price
 
-<<<<<<< Updated upstream
-# Initialize variables to store the latest price and prediction
-latest_price = ???  # need to replace this with the actual value you obtain from the API
-latest_prediction = ???  # need to replace this with the actual value obtained from prediction
-=======
+
 # Predict using the obtained prices
 latest_prediction = predict(open_price, close_price)
->>>>>>> Stashed changes
 
 # Read the HTML file into a list of lines
 with open('template/Stats.html', 'r') as file:
