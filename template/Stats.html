@@ -1,0 +1,60 @@
+<html>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),url(StocksBackground.jpg);
+        }
+        p {
+        color: white;
+        }
+        h1{
+        color: white;
+        }
+        .center{
+        text-align: center;
+        }
+    </style>    
+    <body>
+        <div class="banner">
+            <div class="navbar">
+                <img src="StocksLogo.png" class="logo">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Game</a></li>
+                    <li><a href="#">Stats</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+
+        <title>The Stock Guessing Game</title>
+        <h1 class="center">Todays Stock: Google</h1>
+        <h1 class="center" id="stockPrice"></h1>
+
+        <img class ="center" src="google.png"
+        width="70" 
+        height="70">
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              // Replace 'YOUR_API_KEY' with your actual Finnhub API key
+              const apiKey = 'cjtnki9r01qr9581rns0cjtnki9r01qr9581rnsg';
+              const symboql = 'GOOGL'; // Google's stock symbol on Finnhub
+          
+              const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
+          
+              fetch(apiUrl)
+                  .then(response => response.json())
+                  .then(data => {
+                      const stockPrice = data.c; // 'c' represents the current price in the Finnhub API response
+                      document.getElementById('stockPrice').innerText = `Current Price: $${stockPrice}`;
+                  })
+                  .catch(error => console.error('Error fetching stock price:', error));
+          });
+          </script>
+</body>
+</html> 
+        <h1 class="center">Here is the AI Guesses: </h1>
+
+        <p id="prediction" class="center">Prediction: </p>
+<p class='center'>The prediction is that the stock will go Up</p>
+    </body>

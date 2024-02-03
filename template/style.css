@@ -1,0 +1,239 @@
+<<<<<<< Updated upstream:style.css
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.banner{
+    width: 100%;
+    height: 100;
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),url(StocksBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+}
+.navbar{
+    width: 90%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 120px;
+    cursor: pointer;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+.navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0%0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.navbar ul li:hover::after{
+    width: 100%;
+
+}
+.content{
+    width: 100%;
+    position: aboslute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+.content h1{
+    font-size: 70px;
+    margin-top: 80px;
+}
+.content p{
+    margin:20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+button{
+    top: -0%;
+    left: 35%;
+    margin: auto;
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 60px;
+    font-weight: bold;
+    border: 2px solid #ffffff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;   
+    position: relative;
+    overflow: hidden;
+}
+
+span{
+    background: #009688;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5sl
+
+}
+button:hover span{
+    width: 100%;
+}
+button:hover{
+    border: none;
+}
+.timer {
+    width: 450px;
+    height: auto;
+    padding: 10px;
+    margin: 20px 400px; 
+    text-align: center;
+    outline: solid 1px white;
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 20px;
+}
+=======
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.banner{
+    width: 100%;
+    height: 100;
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),url(StocksBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+}
+.navbar{
+    width: 90%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 120px;
+    cursor: pointer;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+.navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0%0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.navbar ul li:hover::after{
+    width: 100%;
+
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.content{
+    width: 100%;
+    position: aboslute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+.content h1{
+    font-size: 70px;
+    margin-top: 80px;
+}
+.content p{
+    margin:20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+button{
+    top: -0%;
+    left: 35%;
+    margin: auto;
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 60px;
+    font-weight: bold;
+    border: 2px solid #ffffff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;   
+    position: relative;
+    overflow: hidden;
+}
+
+span{
+    background: #009688;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5sl
+
+}
+button:hover span{
+    width: 100%;
+}
+button:hover{
+    border: none;
+}
+.timer {
+    width: 450px;
+    height: auto;
+    padding: 10px;
+    margin: 20px 400px; 
+    text-align: center;
+    outline: solid 1px white;
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 20px;
+}
+>>>>>>> Stashed changes:template/style.css
