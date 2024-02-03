@@ -1,0 +1,35 @@
+<html>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),url(StocksBackground.jpg);
+        }
+        p {
+        color: white;
+        }
+        h1{
+        color: white;
+        }
+        .center{
+        text-align: center;
+        }
+    </style>    
+    <body>
+        <div class="banner">
+            <div class="navbar">
+                <img src="StocksLogo.png" class="logo">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Game</a></li>
+                    <li><a href="#">Stats</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+        <title>The Stock Guessing Game</title>
+        <h1 class="center">Here is the AI Guesses: </h1>
+        <p id="price" class="center">Received Price: {{ price }}</p>
+        <p id="prediction" class="center">Prediction: {{ prediction }}</p>
+
+
+    </body>
+</html>
