@@ -13,7 +13,7 @@
             }
             .center2{
               display: block;
-              margin-left: auto;
+              margin-left: auto;  
               margin-right: auto;
               width: 10%;
               height: 20%;
@@ -47,8 +47,9 @@
                 <li><a href="about.html">About</a></li>
             </ul>
         </div>
+
+
          <!-- Display the countdown timer in an element -->
-        
 
          <h1 class="center" style="padding-top: 20px;">
           The time to vote ends in:
@@ -97,68 +98,30 @@
             <h1 class="center">Stock Price Guessing Game</h1>
             <p class="center">Guess if the stock price of <span id="stock-name">[Stock Name]</span> will be higher or lower by 3pm TODAY!</p>
              <br><br>
-            <button type="button" id="higher-button">Higher</button>
-            <button type="button" id="lower-button">Lower</button>
+            <button type="button" id="higher-button" onclick="alert('You selected higher')">Higher</button>
+            <button type="button" id="lower-button" onclick="alert('You selected lower')">Lower</button>
             <br><br>
             <h1 class="center">Todays Stock: Google</h1>
             <h1 class="center" id="stockPrice"></h1>
 
             <img class ="center2" src="google.png" >
-            
             <script>
-              const stockName = document.querySelector("#stock-name");
-              const higherButton = document.querySelector("#higher-button");
-              const lowerButton = document.querySelector("#lower-button");
-              const result = document.querySelector("#result");
+              document.addEventListener("DOMContentLoaded", function() {
+                  // Replace 'YOUR_API_KEY' with your actual Finnhub API key
+                  const apiKey = 'cjtnki9r01qr9581rns0cjtnki9r01qr9581rnsg';
+                  const symbol = 'GOOGL'; // Google's stock symbol on Finnhub
               
-              let currentStockPrice;
+                  const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
               
-              // Function to fetch stock price data from API
-              async function getStockPrice() {
-                  const response = await fetch("https://finnhub.io/api/v1/quote?symbol=${GOOGL}&token=${cfeqaspr01qoicaf9o30cfeqaspr01qoicaf9o3g}");
-                  const data = await response.json();
-                  return data.price;
-              }
-
-              // Function to start the game
-              async function startGame() {
-
-                // Disable buttons
-                higherButton.disabled = true;
-                lowerButton.disabled = true;
-                
-                // Get current stock price
-                currentStockPrice = await getStockPrice();
-                stockName.textContent = currentStockPrice;
-                
-                // Wait 5 seconds
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                
-                // Get updated stock price
-                const updatedStockPrice = await getStockPrice();
-                
-                // Compare prices and display result
-                if (updatedStockPrice > currentStockPrice) {
-                  result.textContent = "---------------------------------------------"
-                  result.textContent = "The stock price choice was right! You win.";
-                } else {
-                  result.textContent = "---------------------------------------------"
-                  result.textContent = "The stock price choice was wrong. You lose.";
-                }
-                
-                // Enable buttons
-                higherButton.disabled = false;
-                lowerButton.disabled = false;
-              }
-              
-              higherButton.addEventListener("click", startGame);
-              lowerButton.addEventListener("click", startGame);
-            </script>
-          </body>
-          </html>
-            </div>
-        </div>
-
-    </div>
+                  fetch(apiUrl)
+                      .then(response => response.json())
+                      .then(data => {
+                          const stockPrice = data.c; // 'c' represents the current price in the Finnhub API response
+                          document.getElementById('stockPrice').innerText = `Current Price: $${stockPrice}`;
+                      })
+                      .catch(error => console.error('Error fetching stock price:', error));
+              });
+              </script>
 </body>
 </html> 
+
