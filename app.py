@@ -8,8 +8,13 @@ conn = psycopg2.connect(database="StockGuess", user="edward",
                         password="x", host="localhost", port="5432") 
 
 @app.route('/')
+@app.route('/index.html')
 def index():
     return render_template('index.html')
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    return render_template('login.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -24,8 +29,9 @@ def submit():
 
     row = cur.fetchall()
 
-    if row[0][0] == password:
-        return redirect(url_for('index'))
+    if row:
+        if row[0][0] == password:
+            return redirect(url_for('index'))
     return redirect(url_for('login'))
 
 @app.route('/login.html')
