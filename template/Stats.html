@@ -16,6 +16,7 @@
     </style>    
     <body>
         <div class="banner">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <div class="navbar">
                 <img src="StocksLogo.png" class="logo">
                 <ul>
@@ -27,7 +28,7 @@
             </div>
 
         <title>The Stock Guessing Game</title>
-        <h1 class="center">Todays Stock: Google</h1>
+        <h1 class="center">Today's Stock: Google</h1>
         <h1 class="center" id="stockPrice"></h1>
 
         <img class ="center" src="google.png"
@@ -35,6 +36,54 @@
         height="70">
 
         <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const apiKey = 'cjtnki9r01qr9581rns0cjtnki9r01qr9581rnsg';
+        const symbol = 'GOOGL';
+        const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
+
+        // Add this to create a variable to store stock prices
+        let stockPrices = [];
+
+        // Function to update the chart
+        function updateChart() {
+            const ctx = document.getElementById('stockChart').getContext('2d');
+
+            // Use Chart.js to create a line chart
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: stockPrices.map(entry => entry.time),
+                    datasets: [{
+                        label: 'Stock Price',
+                        data: stockPrices.map(entry => entry.price),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                    }]
+                },
+            });
+        }
+
+        function fetchData() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const stockPrice = data.c;
+                    const currentTime = new Date().toLocaleTimeString();
+
+                    // Add the new stock price entry to the array
+                    stockPrices.push({ time: currentTime, price: stockPrice });
+
+                    // Update the chart
+                    updateChart();
+                })
+                .catch(error => console.error('Error fetching stock price:', error));
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchData, 5000);
+    });
+
           document.addEventListener("DOMContentLoaded", function() {
               // Replace 'YOUR_API_KEY' with your actual Finnhub API key
               const apiKey = 'cjtnki9r01qr9581rns0cjtnki9r01qr9581rnsg';
@@ -52,9 +101,8 @@
           });
           </script>
 </body>
-</html> 
-        <h1 class="center">Here is the AI Guesses: </h1>
+</html>
+<h1 class="center">Here is the AI Prediction: </h1>
 
-        <p id="prediction" class="center">Prediction: </p>
-<p class='center'>The prediction is that the stock will go Up</p>
-    </body>
+<p class='center'>THE STOCK WILL GO UP</p>
+<canvas id="stockChart" class="center" width="200" height="100"></canvas>

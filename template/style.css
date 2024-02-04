@@ -83,7 +83,7 @@ button{
     font-weight: bold;
     border: 2px solid #ffffff;
     background: transparent;
-    color: #fff;
+    color: white;
     cursor: pointer;   
     position: relative;
     overflow: hidden;
@@ -113,8 +113,8 @@ button:hover{
     padding: 10px;
     margin: 20px 400px; 
     text-align: center;
-    outline: solid 1px white;
-    font-family: sans-serif;
+    outline: solid 1px red;
+    font-family: 'Orbitron', sans-serif;
     font-size: 30px;
     font-weight: bold;
     border-radius: 20px;

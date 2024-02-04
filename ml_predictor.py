@@ -33,8 +33,8 @@ with open('template/Stats.html', 'r') as file:
     lines = file.readlines()
 
 # Assuming line 58 is at index 57 (lists are zero-indexed)
-line_number_to_replace = 59
-html_content = f"<p class='center'>The prediction is that the stock will go {'Up' if latest_prediction == 1 else 'Down'}</p>"
+line_number_to_replace = 107
+html_content = f"<p class='center'>THE STOCK WILL GO {'UP' if latest_prediction == 1 else 'DOWN'}</p>"
 
 
 # Replace line 58 with the new content
